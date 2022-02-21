@@ -45,6 +45,9 @@ namespace OEngine.Binary {
             BinaryType dataType = (BinaryType)reader.ReadByte();
             int count = 0;
 
+            if(dataType == BinaryType.Null) {
+                return null;
+            }
             if(dataType == BinaryType.Object || dataType == BinaryType.Array) {
                 count = reader.ReadShort();
                 if(count ==0) { return null;  }
@@ -74,9 +77,6 @@ namespace OEngine.Binary {
                     break;
                 case BinaryType.Int:
                     data.SetInt(reader.ReadInt());
-                    break;
-                case BinaryType.Float:
-                    data.SetFloat(reader.ReadFloat());
                     break;
                 case BinaryType.Double:
                     data.SetDouble(reader.ReadDouble());

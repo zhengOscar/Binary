@@ -2,7 +2,7 @@
  * Copyright (c) 2020
  * All rights reserved.
  *
- * 文件名称：BinaryStreamWriter.cs
+ * 文件名称：BinaryStreamLittleWriter.cs
  * 摘    要：
  *
  * 当前版本：1.0
@@ -12,16 +12,16 @@
 
 namespace OEngine.Binary
 {
-    public class BinaryStreamWriter : BinaryStream, IBinaryWriter
+    public class BinaryStreamLittleWriter : BinaryStream, IBinaryWriter
     {
         System.IO.BinaryWriter m_WriteBuffer;
 
-        public BinaryStreamWriter() : base()
+        public BinaryStreamLittleWriter() : base()
         {
             m_WriteBuffer = new System.IO.BinaryWriter(m_Stream, System.Text.Encoding.UTF8);
         }
 
-        ~BinaryStreamWriter()
+        ~BinaryStreamLittleWriter()
         {
             Release();
         }
@@ -51,23 +51,23 @@ namespace OEngine.Binary
 
         public void WriteShort(short value)
         {
-            m_WriteBuffer.Write(value);
+            m_WriteBuffer.Write(System.Net.IPAddress.HostToNetworkOrder(value));
         }
 
         public void WriteInt(int value)
         {
-            m_WriteBuffer.Write(value);
+            m_WriteBuffer.Write(System.Net.IPAddress.HostToNetworkOrder(value));
         }
 
         public void WriteLong(long value)
         {
-            m_WriteBuffer.Write(value);
+            m_WriteBuffer.Write(System.Net.IPAddress.HostToNetworkOrder(value));
         }
 
         public void WriteDouble(double value)
         {
             long netValue = System.BitConverter.DoubleToInt64Bits(value);
-            m_WriteBuffer.Write(netValue);
+            m_WriteBuffer.Write(System.Net.IPAddress.HostToNetworkOrder(netValue));
         }
 
         public void WriteUTF8(string value)

@@ -11,16 +11,16 @@
  */
 namespace OEngine.Binary
 {
-    public class BinaryStreamReader : BinaryStream, IBinaryReader
+    public class BinaryStreamLittleReader : BinaryStream, IBinaryReader
     {
         System.IO.BinaryReader m_ReadBuffer;
 
-        public BinaryStreamReader(byte[] value) : base(value)
+        public BinaryStreamLittleReader(byte[] value) : base(value)
         {
             m_ReadBuffer = new System.IO.BinaryReader(m_Stream);
         }
 
-        ~BinaryStreamReader()
+        ~BinaryStreamLittleReader()
         {
             Release();
         }
@@ -37,23 +37,23 @@ namespace OEngine.Binary
 
         public short ReadShort()
         {
-            return m_ReadBuffer.ReadInt16();
+            return System.Net.IPAddress.NetworkToHostOrder(m_ReadBuffer.ReadInt16());
         }
 
         public int ReadInt()
         {
-            return m_ReadBuffer.ReadInt32();
+            return System.Net.IPAddress.NetworkToHostOrder(m_ReadBuffer.ReadInt32());
         }
 
         public long ReadLong()
         {
-            return m_ReadBuffer.ReadInt64();
+            return System.Net.IPAddress.NetworkToHostOrder(m_ReadBuffer.ReadInt64());
         }
 
         public double ReadDouble()
         {
             long value = m_ReadBuffer.ReadInt64();
-            return System.BitConverter.Int64BitsToDouble(value);
+            return System.BitConverter.Int64BitsToDouble(System.Net.IPAddress.NetworkToHostOrder(value));
         }
 
         public string ReadUTF8()

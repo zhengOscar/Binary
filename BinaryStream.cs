@@ -43,11 +43,6 @@ namespace OEngine.Binary
             return m_Stream.Length;
         }
 
-        public byte[] GetBuffer()
-        {
-            return m_Stream.ToArray();
-        }
-
         public bool IsEnd()
         {
             return m_Stream.Position == m_Stream.Length;

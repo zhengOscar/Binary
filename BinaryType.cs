@@ -17,6 +17,7 @@ namespace OEngine.Binary
     /// </summary>
     public enum BinaryType
     {
+        Null,
         Object=1,
         Array,
 

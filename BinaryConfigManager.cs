@@ -30,12 +30,12 @@ namespace OEngine.Binary
         {
             JsonData data = GetJsonData("welfare_test");
             IDictionary<string, JsonData> dic = data.ValueAsObject();
-
-            BinaryStreamWriter writer = new BinaryStreamWriter();
+            
+            IBinaryWriter writer = new BinaryStreamLittleWriter();
             writer.WriteByte((byte)BinaryType.Object);
             //writer.WriteByte((byte)BinaryType.Int);
             writer.WriteShort((short)dic.Count);
-            
+
             foreach (var item in dic)
             {
                 short len = 0;

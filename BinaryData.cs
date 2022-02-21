@@ -79,6 +79,28 @@ namespace OEngine.Binary
             return m_StringVal;
         }
 
+        public override string ToString()
+        {
+            switch (DataType)
+            {
+                case BinaryType.Int:
+                    return m_IntVal.ToString();
+                case BinaryType.Float:
+                    return m_FloatVal.ToString();
+                case BinaryType.Double:
+                    return m_DoubleVal.ToString();
+                case BinaryType.Boolean:
+                    return m_BooleanVal.ToString();
+                case BinaryType.String:
+                    return m_StringVal.ToString();
+                case BinaryType.Array:
+                    return m_ArrayVal.ToString();
+                case BinaryType.Object:
+                    return m_ObjectVal.ToString();
+            }
+            return string.Empty;
+        }
+
         #region 字典/列表
 
         public void Add(int index,BinaryData data)
@@ -112,6 +134,20 @@ namespace OEngine.Binary
             set
             {
                 m_ArrayVal[index] = value;
+            }
+        }
+        public BinaryData this[string key]
+        {
+            get
+            {
+                return null != m_ObjectVal ? m_ObjectVal[key] :null;
+            }
+            set
+            {
+                if(null != m_ObjectVal)
+                {
+                    m_ObjectVal[key] = value;
+                }
             }
         }
 
